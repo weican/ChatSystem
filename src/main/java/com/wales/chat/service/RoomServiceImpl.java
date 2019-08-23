@@ -39,9 +39,9 @@ public class RoomServiceImpl implements RoomService{
         Room room = new Room();
         room.setName(roomDTO.getName());
         roomMapper.insertRoom(room);
-        for(Integer userId : roomDTO.getUserIdList()) {
-            group_roomMapper.insertGroup(userId, room.getId());
-        }
+        roomDTO.getUserIdList()
+                .parallelStream()
+                .forEach( userId -> group_roomMapper.insertGroup(userId, room.getId()));
         return room.getId();
     }
 }
