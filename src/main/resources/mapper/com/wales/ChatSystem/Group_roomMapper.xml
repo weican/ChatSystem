@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wales.chat.dao.Group_roomMapper">
+
+    <select id="getGroup"  parameterType="Integer"  resultType="Group_room">
+        select
+            *
+        from
+            group_room
+    </select>
+
+    <insert id="insertGroup" parameterType="com.wales.chat.model.Group_room" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into group_room
+            (group_id, room_id)
+        values
+            (#{group_id}, #{room_id})
+    </insert>
+
+</mapper>

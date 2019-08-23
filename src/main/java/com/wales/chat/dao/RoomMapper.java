@@ -11,4 +11,6 @@ public interface RoomMapper {
     Room findById(Integer id);
 
     List<Room> list();  //limited by page
+
+    Integer insertRoom(Room room);
 }

@@ -2,9 +2,11 @@ package com.wales.chat.service;
 
 import com.wales.chat.dao.RoomMapper;
 import com.wales.chat.model.Room;
+import com.wales.chat.service.dto.RoomDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,5 +26,13 @@ public class RoomServiceImpl implements RoomService{
     public Optional<List<Room>> getRooms() {
         List<Room> rooms = roomMapper.list();
         return Optional.ofNullable(rooms);
+    }
+
+    @Override
+    public Integer postRoom(RoomDTO roomDTO) {
+
+        Room room = new Room();
+        room.setName(roomDTO.getName());
+       return roomMapper.insertRoom(room);
     }
 }

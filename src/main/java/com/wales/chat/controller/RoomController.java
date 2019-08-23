@@ -1,7 +1,9 @@
 package com.wales.chat.controller;
 
 import com.wales.chat.model.Room;
+import com.wales.chat.model.User;
 import com.wales.chat.service.RoomService;
+import com.wales.chat.service.dto.RoomDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,19 +22,20 @@ public class RoomController {
 
     @GetMapping("/rooms")
     public ResponseEntity<?> getRooms() {
-
-        Optional<List<Room>> room = roomService.getRooms();
-//        if(user.isPresent()) {
-//            throw new UserException("The user is not found.");
-//        }
-
+        final Optional<List<Room>> room = roomService.getRooms();
         return new ResponseEntity<>(room.get(), HttpStatus.OK);
+    }
+
+    @PostMapping(path ="/rooms", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> postRooms(@RequestBody RoomDTO roomDTO) {
+        final Integer roomId = roomService.postRoom(roomDTO);
+        return new ResponseEntity<>(roomId, HttpStatus.OK);
     }
 
     @GetMapping("/rooms/{id}")
     public ResponseEntity<?> getRoomsById(@PathVariable Integer id) {
 
-        Optional<Room> room = roomService.getRoom(id);
+        final Optional<Room> room = roomService.getRoom(id);
 //        if(user.isPresent()) {
 //            throw new UserException("The user is not found.");
 //        }
