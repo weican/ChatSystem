@@ -14,11 +14,12 @@ public class SubscribeServiceImpl implements SubscribeService{
 
     @Override
     public void sendMessageToUser(PrivateMessage privateMessage) {
-        messagingTemplate.convertAndSend("/topic/greetings", privateMessage);
+        messagingTemplate.convertAndSend("/topic/privateMessage", privateMessage);
     }
 
     @Override
     public void sendMessageToRoom(ChatMessage chatMessage) {
+        messagingTemplate.convertAndSend("/topic/chatRoom", chatMessage);
 
     }
 }

@@ -59,6 +59,7 @@ public class MessgaeServiceImpl implements MessgaeService {
             chatMessage.setMessage(chatMessageDTO.getMessage());
             chatMessage.setTo_user(user_room.getUser_id());
             messageMapper.insertMessage(chatMessage);
+            subscribeService.sendMessageToRoom(chatMessage);
         });
         return  "Message posted";
     }

@@ -53,10 +53,4 @@ public class MessageController {
         return new ResponseEntity<>(privateMessages, HttpStatus.OK);
     }
 
-    @MessageMapping("/user/{id}/messages")
-    public PrivateMessage scbscriblePrivateMessage() {
-        return null;
-    }
-
-
 }
