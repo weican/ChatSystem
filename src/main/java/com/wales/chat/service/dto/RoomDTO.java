@@ -6,16 +6,15 @@ public class RoomDTO {
 
     Integer id;
     String name;
+    List<Integer> userIdList;
 
-    public List<Integer> getAddedId() {
-        return addedId;
+    public List<Integer> getUserIdList() {
+        return userIdList;
     }
 
-    public void setAddedId(List<Integer> addedId) {
-        this.addedId = addedId;
+    public void setUserIdList(List<Integer> userIdList) {
+        this.userIdList = userIdList;
     }
-
-    List<Integer> addedId;
 
     public Integer getId() {
         return id;

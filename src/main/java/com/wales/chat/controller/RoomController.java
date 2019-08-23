@@ -21,12 +21,12 @@ public class RoomController {
     RoomService roomService;
 
     @GetMapping("/rooms")
-    public ResponseEntity<?> getRooms() {
-        final Optional<List<Room>> room = roomService.getRooms();
+    public ResponseEntity<?> getRooms(@RequestParam(defaultValue = "0", required = false) Integer page) {
+        final Optional<List<Room>> room = roomService.getRooms(page);
         return new ResponseEntity<>(room.get(), HttpStatus.OK);
     }
 
-    @PostMapping(path ="/rooms", consumes = "application/json", produces = "application/json")
+    @PostMapping(path ="/rooms")
     public ResponseEntity<?> postRooms(@RequestBody RoomDTO roomDTO) {
         final Integer roomId = roomService.postRoom(roomDTO);
         return new ResponseEntity<>(roomId, HttpStatus.OK);

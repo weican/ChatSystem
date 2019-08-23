@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface RoomService  {
 
     Optional<Room> getRoom(Integer id);
-    Optional<List<Room>> getRooms();
+    Optional<List<Room>> getRooms(Integer page);
     Integer postRoom(RoomDTO roomDTO);
 
 }

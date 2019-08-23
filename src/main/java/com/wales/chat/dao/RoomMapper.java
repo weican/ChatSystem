@@ -10,7 +10,7 @@ public interface RoomMapper {
 
     Room findById(Integer id);
 
-    List<Room> list();  //limited by page
+    List<Room> list(Integer start,Integer end);  //limited by page
 
     Integer insertRoom(Room room);
 }
