@@ -26,9 +26,9 @@ public class MessgaeServiceImpl implements MessgaeService {
 
     @Override
     public Optional<List<PrivateMessage>> getMessageByUserId(Integer id) {
-        List<PrivateMessage> chatMessages =  privateMessageMapper.getMessageByUserId(id);
+        List<PrivateMessage> privateMessage =  privateMessageMapper.getMessageByUserId(id);
 
-        return Optional.ofNullable(chatMessages);
+        return Optional.ofNullable(privateMessage);
     }
 
     @Override

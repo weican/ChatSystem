@@ -7,7 +7,7 @@ public class PrivateMessage {
     Integer from_user;
     Integer to_user;
     String  message;
-    Date postedOn;
+    Date posted_on;
 
 
     public Integer getFrom_user() {
@@ -34,11 +34,11 @@ public class PrivateMessage {
         this.message = message;
     }
 
-    public Date getPostedOn() {
-        return postedOn;
+    public Date getPosted_on() {
+        return posted_on;
     }
 
-    public void setPostedOn(Date postedOn) {
-        this.postedOn = postedOn;
+    public void setPosted_on(Date posted_on) {
+        this.posted_on = posted_on;
     }
 }
