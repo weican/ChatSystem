@@ -30,3 +30,5 @@ VALUE(1, 1, 2, "this is a test message", now());
 INSERT INTO MESSAGE(ROOM_ID, FROM_USER, TO_USER, MESSAGE, POSTED_ON)
 VALUE(1, 1, 3, "this is a test message", now());
 
+INSERT INTO PRIVATE_MESSAGE(FROM_USER, TO_USER, MESSAGE, POSTED_ON)
+VALUE(1, 2, "this is a private test message :p", now());

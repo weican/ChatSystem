@@ -1,28 +1,14 @@
 package com.wales.chat.model;
 
+import java.util.Date;
 
-public class ChatMessage {
-    Integer id;
-    Integer room_id;
+public class PrivateMessage {
+
     Integer from_user;
     Integer to_user;
-    String message;
+    String  message;
+    Date postedOn;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getRoom_id() {
-        return room_id;
-    }
-
-    public void setRoom_id(Integer room_id) {
-        this.room_id = room_id;
-    }
 
     public Integer getFrom_user() {
         return from_user;
@@ -48,4 +34,11 @@ public class ChatMessage {
         this.message = message;
     }
 
+    public Date getPostedOn() {
+        return postedOn;
+    }
+
+    public void setPostedOn(Date postedOn) {
+        this.postedOn = postedOn;
+    }
 }

@@ -12,4 +12,6 @@ public interface MessgaeService {
     Optional<List<ChatMessage>> getMessageByRoomId(Integer id);
 
     String postMessage(Integer id, ChatMessageDTO chatMessageDTO);
+
+    String postMessageToUser(ChatMessageDTO chatMessageDTO);
 }

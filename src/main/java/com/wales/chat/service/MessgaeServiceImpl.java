@@ -1,8 +1,10 @@
 package com.wales.chat.service;
 
 import com.wales.chat.dao.MessageMapper;
+import com.wales.chat.dao.PrivateMessageMapper;
 import com.wales.chat.dao.User_roomMapper;
 import com.wales.chat.model.ChatMessage;
+import com.wales.chat.model.PrivateMessage;
 import com.wales.chat.model.User_room;
 import com.wales.chat.service.dto.ChatMessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class MessgaeServiceImpl implements MessgaeService {
 
     @Autowired
     User_roomMapper user_roomMapper;
+
+    @Autowired
+    PrivateMessageMapper privateMessageMapper;
 
     @Override
     public Optional<List<ChatMessage>> getMessageByUserId(Integer id) {
@@ -49,9 +54,19 @@ public class MessgaeServiceImpl implements MessgaeService {
             chatMessage.setMessage(chatMessageDTO.getMessage());
             chatMessage.setTo_user(user_room.getUser_id());
             messageMapper.insertMessage(chatMessage);
-
         });
 
+        return  "Message posted";
+    }
+
+    @Override
+    public String postMessageToUser(ChatMessageDTO chatMessageDTO) {
+
+        PrivateMessage privateMessage = new PrivateMessage();
+        privateMessage.setFrom_user(chatMessageDTO.getFromUserId());
+        privateMessage.setMessage(chatMessageDTO.getMessage());
+        privateMessage.setTo_user(chatMessageDTO.getToUserId());
+        privateMessageMapper.insertMessage(privateMessage);
 
         return  "Message posted";
     }

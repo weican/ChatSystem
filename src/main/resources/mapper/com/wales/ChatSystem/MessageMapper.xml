@@ -25,8 +25,8 @@
 
     <insert id="insertMessage" parameterType="com.wales.chat.model.ChatMessage">
         insert into message
-            (room_id, from_user, to_user, message)
+            (room_id, from_user, to_user, message,  posted_on)
         values
-            (#{room_id}, #{from_user}, #{to_user}, #{message})
+            (#{room_id}, #{from_user}, #{to_user}, #{message}, now())
     </insert>
 </mapper>

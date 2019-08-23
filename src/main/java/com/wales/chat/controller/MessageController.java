@@ -23,7 +23,7 @@ public class MessageController {
     @GetMapping("/rooms/{id}/messages")
     public ResponseEntity<?> getMessagesByRoomId(@PathVariable Integer id) {
 
-        Optional<List<ChatMessage>> messages = messgaeService.getMessageByRoomId(id);
+        final Optional<List<ChatMessage>> messages = messgaeService.getMessageByRoomId(id);
 
         return new ResponseEntity<>(messages.get(), HttpStatus.OK);
     }
@@ -36,5 +36,20 @@ public class MessageController {
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 
+    @PostMapping("/messages/user")   // TODO need to change path
+    public ResponseEntity<?> postMessagesToUser(@RequestBody ChatMessageDTO chatMessageDTO) {
+
+        final String messages = messgaeService.postMessageToUser(chatMessageDTO);
+
+        return new ResponseEntity<>(messages, HttpStatus.OK);
+    }
+
+//    @GetMapping("/messages/user")   // TODO need to change path
+//    public ResponseEntity<?> getMessagesToUser(@RequestBody ChatMessageDTO chatMessageDTO) {
+//
+//        final String messages = messgaeService.postMessageToUser(chatMessageDTO);
+//
+//        return new ResponseEntity<>(messages, HttpStatus.OK);
+//    }
 
 }
