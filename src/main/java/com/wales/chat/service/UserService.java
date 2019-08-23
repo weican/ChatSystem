@@ -1,11 +1,12 @@
 package com.wales.chat.service;
 
-
-import com.wales.chat.model.User;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> getUser(String name, String password);
+    Optional<User> findByToken(String token);
+
+    String login(String username, String password);
 }

@@ -3,11 +3,12 @@ package com.wales.chat.model;
 import java.util.Date;
 import java.util.List;
 
-public class User {
+public class ChatUser {
     private Long id;
     private Integer role_id;
     private String name;
     private String password;
+    private String token;
     private List<String> roles;
     private Date lastdasswordresetdate;
 
@@ -57,5 +58,13 @@ public class User {
 
     public void setLastdasswordresetdate(Date lastdasswordresetdate) {
         this.lastdasswordresetdate = lastdasswordresetdate;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

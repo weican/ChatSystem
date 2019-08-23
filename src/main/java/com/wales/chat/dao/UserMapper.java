@@ -1,10 +1,16 @@
 package com.wales.chat.dao;
 
-import com.wales.chat.model.User;
+import com.wales.chat.model.ChatUser;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Optional;
 
 @Mapper
 public interface UserMapper {
 
-    User findByUserName(String name);
+    ChatUser findByUserName(String name);
+
+    Optional<ChatUser> findByToken(String token);
+
+    void updateUser(ChatUser chatUser);
 }

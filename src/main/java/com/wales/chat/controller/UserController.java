@@ -1,35 +1,33 @@
 package com.wales.chat.controller;
 
-import com.wales.chat.controller.error.UserException;
-import com.wales.chat.model.User;
+import com.wales.chat.model.ChatUser;
 import com.wales.chat.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 
 @RestController
-@RequestMapping("/api")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @GetMapping("/user")
-    public ResponseEntity<?> getUser(@RequestParam String name, @RequestParam String password) {
+    @PostMapping("/login")
+    public ResponseEntity<?> getUser(@RequestBody ChatUser chatUser) {
+        String password = new String(Base64.getDecoder()
+                .decode(chatUser.getPassword().replace("Basic ", "")), StandardCharsets.UTF_8);
+        String token= userService.login(chatUser.getName(),password);
+        if(StringUtils.isEmpty(token)){
+            return new ResponseEntity<>("no token found", HttpStatus.BAD_REQUEST); // TODO Exception
+        }
 
-        Optional<User> user = userService.getUser(name,password);
-
-//        if(user.isPresent()) {
-//            throw new UserException("The user is not found.");
-//        }
-
-        return new ResponseEntity<>(user.get(), HttpStatus.OK);
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
 }
