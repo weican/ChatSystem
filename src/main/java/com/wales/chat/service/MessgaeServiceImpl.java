@@ -1,7 +1,7 @@
 package com.wales.chat.service;
 
 import com.wales.chat.dao.MessageMapper;
-import com.wales.chat.model.Message;
+import com.wales.chat.model.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +14,17 @@ public class MessgaeServiceImpl implements MessgaeService {
     MessageMapper messageMapper;
 
     @Override
-    public Optional<List<Message>> getMessageByUserId(Integer id) {
-        List<Message> messages=  messageMapper.getMessageByUserId(id);
+    public Optional<List<ChatMessage>> getMessageByUserId(Integer id) {
+        List<ChatMessage> chatMessages =  messageMapper.getMessageByUserId(id);
 
-        return Optional.ofNullable(messages);
+        return Optional.ofNullable(chatMessages);
     }
 
     @Override
-    public Optional<List<Message>> getMessageByRoomId(Integer id) {
-       List<Message> messages=  messageMapper.getMessageByRoomId(id);
+    public Optional<List<ChatMessage>> getMessageByRoomId(Integer id) {
+       List<ChatMessage> chatMessages =  messageMapper.getMessageByRoomId(id);
 
-       return Optional.ofNullable(messages);
+       return Optional.ofNullable(chatMessages);
     }
 
 }

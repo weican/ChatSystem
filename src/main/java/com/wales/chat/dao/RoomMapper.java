@@ -1,6 +1,6 @@
 package com.wales.chat.dao;
 
-import com.wales.chat.model.Room;
+import com.wales.chat.model.ChatRoom;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 @Mapper
 public interface RoomMapper {
 
-    Room findById(Integer id);
+    ChatRoom findById(Integer id);
 
-    List<Room> list(Integer start,Integer end);  //limited by page
+    List<ChatRoom> list(Integer start, Integer end);  //limited by page
 
-    Integer insertRoom(Room room);
+    Integer insertRoom(ChatRoom chatRoom);
 }

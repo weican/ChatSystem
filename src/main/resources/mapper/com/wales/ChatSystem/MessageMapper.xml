@@ -5,18 +5,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wales.chat.dao.MessageMapper">
 
-    <select id="getMessageByRoomId"  parameterType="Integer"  resultType="Message">
+    <select id="getMessageByRoomId"  parameterType="Integer"  resultType="ChatMessage">
         select
-        *
+            room_id, from_user, to_user, message
         from
             message
         where
             room_id = #{id}
     </select>
 
-    <select id="getMessageByUserId" parameterType="Integer" resultType="Message">
+    <select id="getMessageByUserId" parameterType="Integer" resultType="ChatMessage">
         select
-        *
+            room_id, from_user, to_user, message
         from
             message
         where

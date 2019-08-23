@@ -1,14 +1,12 @@
 package com.wales.chat.service;
 
-import com.wales.chat.dao.Group_roomMapper;
+import com.wales.chat.dao.User_roomMapper;
 import com.wales.chat.dao.RoomMapper;
-import com.wales.chat.model.Group_room;
-import com.wales.chat.model.Room;
+import com.wales.chat.model.ChatRoom;
 import com.wales.chat.service.dto.RoomDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,29 +17,29 @@ public class RoomServiceImpl implements RoomService{
     RoomMapper roomMapper;
 
     @Autowired
-    Group_roomMapper group_roomMapper;
+    User_roomMapper user_roomMapper;
 
     @Override
-    public Optional<Room> getRoom(Integer id) {
-        final Room room = roomMapper.findById(id);
-        return Optional.ofNullable(room);
+    public Optional<ChatRoom> getRoom(Integer id) {
+        final ChatRoom chatRoom = roomMapper.findById(id);
+        return Optional.ofNullable(chatRoom);
     }
 
     @Override
-    public Optional<List<Room>> getRooms(Integer page) {
-        final List<Room> rooms = roomMapper.list(page * 10,page * 10 + 10);
-        return Optional.ofNullable(rooms);
+    public Optional<List<ChatRoom>> getRooms(Integer page) {
+        final List<ChatRoom> chatRooms = roomMapper.list(page * 10,page * 10 + 10);
+        return Optional.ofNullable(chatRooms);
     }
 
     @Override
     public Integer postRoom(RoomDTO roomDTO) {
 
-        Room room = new Room();
-        room.setName(roomDTO.getName());
-        roomMapper.insertRoom(room);
+        ChatRoom chatRoom = new ChatRoom();
+        chatRoom.setName(roomDTO.getName());
+        roomMapper.insertRoom(chatRoom);
         roomDTO.getUserIdList()
                 .parallelStream()
-                .forEach( userId -> group_roomMapper.insertGroup(userId, room.getId()));
-        return room.getId();
+                .forEach( userId -> user_roomMapper.insertUserRoom(userId, chatRoom.getId()));
+        return chatRoom.getId();
     }
 }

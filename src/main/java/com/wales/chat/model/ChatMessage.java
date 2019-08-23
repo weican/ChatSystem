@@ -1,6 +1,6 @@
 package com.wales.chat.model;
 
-public class Message {
+public class ChatMessage {
     Integer id;
     Integer room_id;
     Integer from_user;

@@ -3,16 +3,16 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wales.chat.dao.Group_roomMapper">
+<mapper namespace="com.wales.chat.dao.User_roomMapper">
 
-    <select id="getGroup"  parameterType="Integer"  resultType="Group_room">
+    <select id="getUserRoom"  parameterType="Integer"  resultType="User_room">
         select
-            *
+            user_id, room_id
         from
-            group_room
+            user_room
     </select>
-    <insert id="insertGroup" parameterType="Integer">
-        insert into group_room
+    <insert id="insertUserRoom" parameterType="Integer">
+        insert into user_room
             (user_id, room_id)
         values
             (#{userId}, #{roomId})

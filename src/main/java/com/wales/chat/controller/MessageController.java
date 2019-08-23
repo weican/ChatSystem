@@ -1,7 +1,6 @@
 package com.wales.chat.controller;
 
-import com.wales.chat.model.Message;
-import com.wales.chat.model.Room;
+import com.wales.chat.model.ChatMessage;
 import com.wales.chat.service.MessgaeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,7 @@ public class MessageController {
     @GetMapping("/rooms/{id}/messages")
     public ResponseEntity<?> getMessagesByRoomId(@PathVariable Integer id) {
 
-        Optional<List<Message>> messages = messgaeService.getMessageByRoomId(id);
+        Optional<List<ChatMessage>> messages = messgaeService.getMessageByRoomId(id);
 
         return new ResponseEntity<>(messages.get(), HttpStatus.OK);
     }

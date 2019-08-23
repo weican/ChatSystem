@@ -1,6 +1,6 @@
 package com.wales.chat.model;
 
-public class Room {
+public class ChatRoom {
     Integer id;
     String name;
 

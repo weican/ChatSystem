@@ -4,23 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wales.chat.dao.RoomMapper">
 
-    <select id="list" parameterType="Integer" resultType="Room">
+    <select id="list" parameterType="Integer" resultType="ChatRoom">
         select
-            *
+            id, name
         from
             room
         limit #{start}, #{end}
     </select>
 
-    <select id="findById" parameterType="Integer" resultType="Room">
+    <select id="findById" parameterType="Integer" resultType="ChatRoom">
         select
-        *
+            id, name
         from
             room
         where id = #{id}
     </select>
 
-    <insert id="insertRoom" parameterType="com.wales.chat.model.Room" useGeneratedKeys="true"
+    <insert id="insertRoom" parameterType="com.wales.chat.model.ChatRoom" useGeneratedKeys="true"
             keyProperty="id">
         insert into room
             (name)
