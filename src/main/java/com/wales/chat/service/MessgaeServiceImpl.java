@@ -8,6 +8,7 @@ import com.wales.chat.model.PrivateMessage;
 import com.wales.chat.model.User_room;
 import com.wales.chat.service.dto.ChatMessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public class MessgaeServiceImpl implements MessgaeService {
 
     @Autowired
     PrivateMessageMapper privateMessageMapper;
+
+    @Autowired
+    SubscribeService subscribeService;
+
 
     @Override
     public Optional<List<PrivateMessage>> getMessageByUserId(Integer id) {
@@ -55,7 +60,6 @@ public class MessgaeServiceImpl implements MessgaeService {
             chatMessage.setTo_user(user_room.getUser_id());
             messageMapper.insertMessage(chatMessage);
         });
-
         return  "Message posted";
     }
 
@@ -68,6 +72,7 @@ public class MessgaeServiceImpl implements MessgaeService {
         privateMessage.setMessage(chatMessageDTO.getMessage());
         privateMessage.setTo_user(chatMessageDTO.getToUserId());
         int tmp = privateMessageMapper.insertMessage(privateMessage);
+        subscribeService.sendMessageToUser(privateMessage);
         return tmp == 1? "Message posted" : "The user id does not exist";
 
     }
