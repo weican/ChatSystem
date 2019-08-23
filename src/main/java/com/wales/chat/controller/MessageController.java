@@ -1,7 +1,7 @@
 package com.wales.chat.controller;
 
-import com.wales.chat.dao.MessageMapper;
 import com.wales.chat.model.ChatMessage;
+import com.wales.chat.model.PrivateMessage;
 import com.wales.chat.service.MessgaeService;
 import com.wales.chat.service.dto.ChatMessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,25 +31,25 @@ public class MessageController {
     @PostMapping("/rooms/{id}/messages")
     public ResponseEntity<?> postMessagesByRoomId(@PathVariable Integer id, @RequestBody ChatMessageDTO chatMessageDTO) {
 
-        final String messages = messgaeService.postMessage(id, chatMessageDTO);
+        final String messages = messgaeService.postChatMessage(id, chatMessageDTO);
 
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 
-    @PostMapping("/messages/user")   // TODO need to change path
-    public ResponseEntity<?> postMessagesToUser(@RequestBody ChatMessageDTO chatMessageDTO) {
+    @PostMapping("/user/{id}/messages")
+    public ResponseEntity<?> postMessagesToUser(@PathVariable Integer id, @RequestBody ChatMessageDTO chatMessageDTO) {
 
-        final String messages = messgaeService.postMessageToUser(chatMessageDTO);
+        final String messages = messgaeService.postPrivateMessageToUser(id, chatMessageDTO);
 
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 
-//    @GetMapping("/messages/user")   // TODO need to change path
-//    public ResponseEntity<?> getMessagesToUser(@RequestBody ChatMessageDTO chatMessageDTO) {
-//
-//        final String messages = messgaeService.postMessageToUser(chatMessageDTO);
-//
-//        return new ResponseEntity<>(messages, HttpStatus.OK);
-//    }
+    @GetMapping("/user/{id}/messages")
+    public ResponseEntity<?> getMessagesToUser(@PathVariable Integer id) {
+
+        final Optional<List<PrivateMessage>> privateMessages = messgaeService.getMessageByUserId(id);
+
+        return new ResponseEntity<>(privateMessages, HttpStatus.OK);
+    }
 
 }

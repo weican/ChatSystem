@@ -25,8 +25,8 @@ public class MessgaeServiceImpl implements MessgaeService {
     PrivateMessageMapper privateMessageMapper;
 
     @Override
-    public Optional<List<ChatMessage>> getMessageByUserId(Integer id) {
-        List<ChatMessage> chatMessages =  messageMapper.getMessageByUserId(id);
+    public Optional<List<PrivateMessage>> getMessageByUserId(Integer id) {
+        List<PrivateMessage> chatMessages =  privateMessageMapper.getMessageByUserId(id);
 
         return Optional.ofNullable(chatMessages);
     }
@@ -39,7 +39,7 @@ public class MessgaeServiceImpl implements MessgaeService {
     }
 
     @Override
-    public String postMessage(Integer roomId, ChatMessageDTO chatMessageDTO) {
+    public String postChatMessage(Integer roomId, ChatMessageDTO chatMessageDTO) {
 
         List<User_room> user_rooms = user_roomMapper.getUserRoom(roomId);
 
@@ -60,15 +60,16 @@ public class MessgaeServiceImpl implements MessgaeService {
     }
 
     @Override
-    public String postMessageToUser(ChatMessageDTO chatMessageDTO) {
+    public String postPrivateMessageToUser(Integer formUser, ChatMessageDTO chatMessageDTO) {
 
+        // TODO DataIntegrityViolationException  fromUser or toUser are not exist
         PrivateMessage privateMessage = new PrivateMessage();
-        privateMessage.setFrom_user(chatMessageDTO.getFromUserId());
+        privateMessage.setFrom_user(formUser);
         privateMessage.setMessage(chatMessageDTO.getMessage());
         privateMessage.setTo_user(chatMessageDTO.getToUserId());
-        privateMessageMapper.insertMessage(privateMessage);
+        int tmp = privateMessageMapper.insertMessage(privateMessage);
+        return tmp == 1? "Message posted" : "The user id does not exist";
 
-        return  "Message posted";
     }
 
 }
