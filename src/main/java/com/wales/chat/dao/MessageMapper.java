@@ -11,4 +11,6 @@ public interface MessageMapper {
     List<ChatMessage> getMessageByRoomId(Integer id);
 
     List<ChatMessage> getMessageByUserId(Integer id);
+
+    Integer insertMessage(ChatMessage chatMessage);
 }

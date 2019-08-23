@@ -10,6 +10,7 @@
             user_id, room_id
         from
             user_room
+        where room_id = #{roomId}
     </select>
     <insert id="insertUserRoom" parameterType="Integer">
         insert into user_room

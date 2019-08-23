@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface User_roomMapper {
 
-    List<User_room> getUserRoom();
+    List<User_room> getUserRoom(Integer roomId);
 
     Integer insertUserRoom(Integer userId, Integer roomId);
 }

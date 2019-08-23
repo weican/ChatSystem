@@ -6,7 +6,6 @@ public class ChatMessage {
     Integer from_user;
     Integer to_user;
     String message;
-    Integer group_id;
 
     public Integer getId() {
         return id;
@@ -48,11 +47,4 @@ public class ChatMessage {
         this.message = message;
     }
 
-    public Integer getGroup_id() {
-        return group_id;
-    }
-
-    public void setGroup_id(Integer group_id) {
-        this.group_id = group_id;
-    }
 }
