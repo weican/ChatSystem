@@ -10,5 +10,5 @@ public interface Group_roomMapper {
 
     List<Group_room> getGroup();
 
-    Integer insertGroup(Group_room group_room);
+    Integer insertGroup(Integer userId, Integer roomId);
 }

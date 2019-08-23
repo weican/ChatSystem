@@ -11,12 +11,11 @@
         from
             group_room
     </select>
-
-    <insert id="insertGroup" parameterType="com.wales.chat.model.Group_room" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    <insert id="insertGroup" parameterType="Integer">
         insert into group_room
-            (group_id, room_id)
+            (user_id, room_id)
         values
-            (#{group_id}, #{room_id})
+            (#{userId}, #{roomId})
     </insert>
 
 </mapper>
