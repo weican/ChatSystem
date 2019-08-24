@@ -1,11 +1,18 @@
 package com.wales.chat.service.dto;
 
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class RoomDTO {
 
+    @Id
     Integer id;
+
+    @NotNull(message = "Name is mandatory")
     String name;
+
+    @NotNull(message = "User list is mandatory")
     List<Integer> userIdList;
 
     public List<Integer> getUserIdList() {

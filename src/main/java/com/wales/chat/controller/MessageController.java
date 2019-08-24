@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class MessageController {
     }
 
     @PostMapping("/rooms/{id}/messages")
-    public ResponseEntity<?> postMessagesByRoomId(@PathVariable Integer id, @RequestBody ChatMessageDTO chatMessageDTO) {
+    public ResponseEntity<?> postMessagesByRoomId(@PathVariable Integer id,@Valid @RequestBody ChatMessageDTO chatMessageDTO) {
 
         final String messages = messgaeService.postChatMessage(id, chatMessageDTO);
 
@@ -39,7 +40,7 @@ public class MessageController {
     }
 
     @PostMapping("/users/{id}/messages")
-    public ResponseEntity<?> postMessagesToUser(@PathVariable Integer id, @RequestBody ChatMessageDTO chatMessageDTO) {
+    public ResponseEntity<?> postMessagesToUser(@PathVariable Integer id,@Valid @RequestBody ChatMessageDTO chatMessageDTO) {
 
         final String messages = messgaeService.postPrivateMessageToUser(id, chatMessageDTO);
 

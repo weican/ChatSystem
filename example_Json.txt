@@ -1,25 +1,34 @@
 
-post
-http://localhost:8080/api/rooms/1/messages
-{
-	"posterId ": 3,
-    "toUserId": 1,
-    "message": "room test"
-	
-}
 
-post
-http://localhost:8080/api/rooms/1/messages
-{
-	"posterId ": 3,
-    "toUserId": 1,
-    "message": "room test"
+Get   list existing chat rooms
+http://localhost:8080/api/rooms
 
-}
-
-post
+Post  create new chat rooms
 http://localhost:8080/api/rooms
 {
-    "name": "new room 1",
+    "name": "Banff group",
     "userIdList": [1,2,3]
+}
+
+Get list messages from any chat room
+http://localhost:8080/api/rooms/5/messages
+
+Post post messages to any chat room (there is no need to join the room)
+http://localhost:8080/api/rooms/5/messages
+{
+"posterId": 1,
+    "toUserId": 1,
+    "message": "Hello I'm admin"
+}
+
+Get list messages posted to directly them
+http://localhost:8080/api/users/2/messages
+
+Post  post messages to any other user
+http://localhost:8080/api/users/2/messages
+{
+    "posterId": 1,
+    "toUserId": 1,
+    "message": "Hello user 2,  I'm admin "
+}
 }

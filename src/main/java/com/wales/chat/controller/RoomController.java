@@ -6,10 +6,10 @@ import com.wales.chat.service.dto.RoomDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +31,7 @@ public class RoomController {
     }
 
     @PostMapping(path ="/rooms")
-    public ResponseEntity<?> postRooms(@RequestBody RoomDTO roomDTO) {
+    public ResponseEntity<?> postRooms(@Valid @RequestBody RoomDTO roomDTO) {
         final Integer roomId = roomService.postRoom(roomDTO);
         return new ResponseEntity<>(roomId, HttpStatus.CREATED);
     }
