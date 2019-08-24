@@ -1,0 +1,18 @@
+
+post
+http://localhost:8080/api/rooms/1/messages
+{
+	"fromUserId": 3,
+    "toUserId": 1,
+    "message": "room test"
+	
+}
+
+post
+http://localhost:8080/api/rooms/1/messages
+{
+	"fromUserId": 3,
+    "toUserId": 1,
+    "message": "room test"
+
+}

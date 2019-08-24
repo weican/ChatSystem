@@ -22,7 +22,7 @@ function connect() {
             showGreeting(JSON.parse(greeting.body).message);
         });
 
-        stompClient.subscribe('/topic/chatRoom', function (chatRoom) {
+        stompClient.subscribe('/room/1/subscribe', function (chatRoom) {
              const message = JSON.parse(chatRoom.body).message;
              const roomId = JSON.parse(chatRoom.body).room_id;
              showGreeting("Chat room " + roomId + ": " + message);

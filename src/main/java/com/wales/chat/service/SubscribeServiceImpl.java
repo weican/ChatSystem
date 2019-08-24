@@ -18,8 +18,8 @@ public class SubscribeServiceImpl implements SubscribeService{
     }
 
     @Override
-    public void sendMessageToRoom(ChatMessage chatMessage) {
-        messagingTemplate.convertAndSend("/topic/chatRoom", chatMessage);
+    public void sendMessageToRoom(ChatMessage chatMessage)  {
+        messagingTemplate.convertAndSend("/room/"+chatMessage.getRoom_id()+"/subscribe", chatMessage);
 
     }
 }

@@ -72,7 +72,7 @@ public class MessgaeServiceImpl implements MessgaeService {
         privateMessage.setFrom_user(formUser);
         privateMessage.setMessage(chatMessageDTO.getMessage());
         privateMessage.setTo_user(chatMessageDTO.getToUserId());
-        int tmp = privateMessageMapper.insertMessage(privateMessage);
+        int tmp = privateMessageMapper.insertMessage(privateMessage);  //TODO
         subscribeService.sendMessageToUser(privateMessage);
         return tmp == 1? "Message posted" : "The user id does not exist";
 
