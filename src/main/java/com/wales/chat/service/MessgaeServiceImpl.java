@@ -3,15 +3,16 @@ package com.wales.chat.service;
 import com.wales.chat.dao.MessageMapper;
 import com.wales.chat.dao.PrivateMessageMapper;
 import com.wales.chat.dao.User_roomMapper;
-import com.wales.chat.model.ChatMessage;
-import com.wales.chat.model.PrivateMessage;
-import com.wales.chat.model.User_room;
+import com.wales.chat.exception.NotFoundException;
+import com.wales.chat.model.*;
 import com.wales.chat.service.dto.ChatMessageDTO;
+import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,11 +30,21 @@ public class MessgaeServiceImpl implements MessgaeService {
     @Autowired
     SubscribeService subscribeService;
 
+    @Autowired
+    RoomService roomService;
+
+    @Autowired
+    UserService userService;
+
     @Value("${pageAmount}")
     private Integer pageAmount;
 
     @Override
-    public Optional<List<PrivateMessage>> getMessageByUserId(Integer id, Integer page) {
+    public Optional<List<PrivateMessage>> getMessageByUserId(Integer id, Integer page) throws NotFoundException {
+        Optional<ChatUser> chatUser = userService.getUser(id);
+        if(!chatUser.isPresent()) {
+            throw  new NotFoundException("User Not Found");
+        }
         List<PrivateMessage> privateMessage =  privateMessageMapper.getMessageByUserId(id,
                 page * pageAmount,page * pageAmount + pageAmount);
 
@@ -41,7 +52,11 @@ public class MessgaeServiceImpl implements MessgaeService {
     }
 
     @Override
-    public Optional<List<ChatMessage>> getMessageByRoomId(Integer id, Integer page) {
+    public Optional<List<ChatMessage>> getMessageByRoomId(Integer id, Integer page) throws NotFoundException {
+       Optional<ChatRoom> chatRoom =  roomService.getRoom(id);
+       if(!chatRoom.isPresent()) {
+           throw new NotFoundException("Room Not Found");
+       }
        List<ChatMessage> chatMessages =  messageMapper.getMessageByRoomId(id, page * pageAmount,page * pageAmount + pageAmount);
 
        return Optional.ofNullable(chatMessages);
@@ -69,16 +84,18 @@ public class MessgaeServiceImpl implements MessgaeService {
     }
 
     @Override
-    public String postPrivateMessageToUser(Integer formUser, ChatMessageDTO chatMessageDTO) {
-
-        // TODO DataIntegrityViolationException  fromUser or toUser are not exist
+    public String postPrivateMessageToUser(Integer toUser, ChatMessageDTO chatMessageDTO) throws NotFoundException {
+        Optional<ChatUser> chatUser = userService.getUser(toUser);
+        if(!chatUser.isPresent()) {
+            throw new NotFoundException("User Not Found");
+        }
         PrivateMessage privateMessage = new PrivateMessage();
-        privateMessage.setFrom_user(formUser);
+        privateMessage.setFrom_user(chatMessageDTO.getPosterId());
         privateMessage.setMessage(chatMessageDTO.getMessage());
-        privateMessage.setTo_user(chatMessageDTO.getToUserId());
-        int tmp = privateMessageMapper.insertMessage(privateMessage);  //TODO
+        privateMessage.setTo_user(toUser);
+        privateMessageMapper.insertMessage(privateMessage);
         subscribeService.sendMessageToUser(privateMessage);
-        return tmp == 1? "Message posted" : "The user id does not exist";
+        return  "Message posted";
 
     }
 

@@ -18,6 +18,9 @@ public class UserServiceImpl implements  UserService{
     @Override
     public Optional<ChatUser> getUser(Integer userId) {
         ChatUser chatUser = userMapper.findById(userId);
+        if(chatUser == null) {
+            return Optional.empty();
+        }
         chatUser.setPassword("");
         chatUser.setRoles(new ArrayList<>());
         chatUser.setRole_id(0);

@@ -14,5 +14,5 @@ public interface MessgaeService {
 
     String postChatMessage(Integer roomId, ChatMessageDTO chatMessageDTO);
 
-    String postPrivateMessageToUser(Integer formUser, ChatMessageDTO chatMessageDTO);
+    String postPrivateMessageToUser(Integer toUser, ChatMessageDTO chatMessageDTO);
 }

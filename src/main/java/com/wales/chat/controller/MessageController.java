@@ -35,18 +35,18 @@ public class MessageController {
 
         final String messages = messgaeService.postChatMessage(id, chatMessageDTO);
 
-        return new ResponseEntity<>(messages, HttpStatus.OK);
+        return new ResponseEntity<>(messages, HttpStatus.CREATED);
     }
 
-    @PostMapping("/user/{id}/messages")
+    @PostMapping("/users/{id}/messages")
     public ResponseEntity<?> postMessagesToUser(@PathVariable Integer id, @RequestBody ChatMessageDTO chatMessageDTO) {
 
         final String messages = messgaeService.postPrivateMessageToUser(id, chatMessageDTO);
 
-        return new ResponseEntity<>(messages, HttpStatus.OK);
+        return new ResponseEntity<>(messages, HttpStatus.CREATED);
     }
 
-    @GetMapping("/user/{id}/messages")
+    @GetMapping("/users/{id}/messages")
     public ResponseEntity<?> getMessagesToUser(@PathVariable Integer id,
                                                @RequestParam(defaultValue = "0", required = false) Integer page) {
 
