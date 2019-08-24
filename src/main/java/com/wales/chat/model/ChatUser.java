@@ -10,7 +10,7 @@ public class ChatUser {
     private String password;
     private String token;
     private List<String> roles;
-    private Date lastdasswordresetdate;
+    private Date last_password_reset_date;
 
     public Long getId() {
         return id;
@@ -52,12 +52,12 @@ public class ChatUser {
         this.roles = roles;
     }
 
-    public Date getLastdasswordresetdate() {
-        return lastdasswordresetdate;
+    public Date getLast_password_reset_date() {
+        return last_password_reset_date;
     }
 
-    public void setLastdasswordresetdate(Date lastdasswordresetdate) {
-        this.lastdasswordresetdate = lastdasswordresetdate;
+    public void setLast_password_reset_date(Date last_password_reset_date) {
+        this.last_password_reset_date = last_password_reset_date;
     }
 
     public String getToken() {

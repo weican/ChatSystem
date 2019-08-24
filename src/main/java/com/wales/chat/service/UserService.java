@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserService {
 
-    ChatUser login(String username, String password);
+    Optional<ChatUser> getUser(Integer userId);
 }

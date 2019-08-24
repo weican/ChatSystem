@@ -19,7 +19,7 @@ public class User implements UserDetails {
         this.password = chatUser.getPassword();
         this.email = "";
         this.authorities = null;
-        this.lastPasswordResetDate = chatUser.getLastdasswordresetdate();
+        this.lastPasswordResetDate = chatUser.getLast_password_reset_date();
     }
 
     @Override

@@ -10,6 +10,8 @@ public interface UserMapper {
 
     ChatUser findByUserName(String name);
 
+    ChatUser findById(Integer userId);
+
     Optional<ChatUser> findByToken(String token);
 
     void updateUser(ChatUser chatUser);

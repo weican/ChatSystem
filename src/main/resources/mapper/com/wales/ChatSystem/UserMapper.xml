@@ -14,7 +14,14 @@
             name = #{name}
     </select>
 
-
+    <select id="findById" parameterType="Integer" resultType="ChatUser">
+        select
+            id, name, password, last_password_reset_date
+        from
+            chat_user
+        where
+            id = #{userId}
+    </select>
 
     <select id="findByToken" parameterType="String" resultType="ChatUser">
         select

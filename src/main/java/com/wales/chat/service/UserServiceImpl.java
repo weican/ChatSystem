@@ -6,25 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements  UserService{
 
-
     @Autowired
     UserMapper userMapper;
 
     @Override
-    public ChatUser login(String name, String password) {
-        final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        ChatUser chatUser = userMapper.findByUserName(name);
-
-        if(chatUser != null && bCryptPasswordEncoder.matches(password, chatUser.getPassword())){
-            chatUser.setPassword("");
-            return chatUser;
-        }
-
-        return null;
+    public Optional<ChatUser> getUser(Integer userId) {
+        ChatUser chatUser = userMapper.findById(userId);
+        chatUser.setPassword("");
+        chatUser.setRoles(new ArrayList<>());
+        chatUser.setRole_id(0);
+        chatUser.setToken("");
+        return Optional.ofNullable(chatUser);
     }
 }
