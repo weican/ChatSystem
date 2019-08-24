@@ -22,9 +22,10 @@ public class MessageController {
 
 
     @GetMapping("/rooms/{id}/messages")
-    public ResponseEntity<?> getMessagesByRoomId(@PathVariable Integer id) {
+    public ResponseEntity<?> getMessagesByRoomId(@PathVariable Integer id,
+                                                 @RequestParam(defaultValue = "0", required = false) Integer page) {
 
-        final Optional<List<ChatMessage>> messages = messgaeService.getMessageByRoomId(id);
+        final Optional<List<ChatMessage>> messages = messgaeService.getMessageByRoomId(id, page);
 
         return new ResponseEntity<>(messages.get(), HttpStatus.OK);
     }
@@ -46,9 +47,10 @@ public class MessageController {
     }
 
     @GetMapping("/user/{id}/messages")
-    public ResponseEntity<?> getMessagesToUser(@PathVariable Integer id) {
+    public ResponseEntity<?> getMessagesToUser(@PathVariable Integer id,
+                                               @RequestParam(defaultValue = "0", required = false) Integer page) {
 
-        final Optional<List<PrivateMessage>> privateMessages = messgaeService.getMessageByUserId(id);
+        final Optional<List<PrivateMessage>> privateMessages = messgaeService.getMessageByUserId(id, page);
 
         return new ResponseEntity<>(privateMessages, HttpStatus.OK);
     }

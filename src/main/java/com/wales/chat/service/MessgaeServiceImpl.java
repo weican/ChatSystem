@@ -8,6 +8,7 @@ import com.wales.chat.model.PrivateMessage;
 import com.wales.chat.model.User_room;
 import com.wales.chat.service.dto.ChatMessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 
@@ -28,17 +29,20 @@ public class MessgaeServiceImpl implements MessgaeService {
     @Autowired
     SubscribeService subscribeService;
 
+    @Value("${pageAmount}")
+    private Integer pageAmount;
 
     @Override
-    public Optional<List<PrivateMessage>> getMessageByUserId(Integer id) {
-        List<PrivateMessage> privateMessage =  privateMessageMapper.getMessageByUserId(id);
+    public Optional<List<PrivateMessage>> getMessageByUserId(Integer id, Integer page) {
+        List<PrivateMessage> privateMessage =  privateMessageMapper.getMessageByUserId(id,
+                page * pageAmount,page * pageAmount + pageAmount);
 
         return Optional.ofNullable(privateMessage);
     }
 
     @Override
-    public Optional<List<ChatMessage>> getMessageByRoomId(Integer id) {
-       List<ChatMessage> chatMessages =  messageMapper.getMessageByRoomId(id);
+    public Optional<List<ChatMessage>> getMessageByRoomId(Integer id, Integer page) {
+       List<ChatMessage> chatMessages =  messageMapper.getMessageByRoomId(id, page * pageAmount,page * pageAmount + pageAmount);
 
        return Optional.ofNullable(chatMessages);
     }

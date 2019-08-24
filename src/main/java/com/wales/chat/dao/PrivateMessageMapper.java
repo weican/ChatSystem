@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface PrivateMessageMapper {
 
-    List<PrivateMessage> getMessageByUserId(Integer id);
+    List<PrivateMessage> getMessageByUserId(Integer id, Integer start, Integer end);
 
     Integer insertMessage(PrivateMessage privateMessage);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface MessageMapper {
 
-    List<ChatMessage> getMessageByRoomId(Integer id);
+    List<ChatMessage> getMessageByRoomId(Integer id, Integer start, Integer end);
 
     List<ChatMessage> getMessageByUserId(Integer id);
 

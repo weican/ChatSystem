@@ -13,6 +13,7 @@
             private_message
         where
             to_user = #{id}
+        limit #{start}, #{end}
     </select>
 
     <insert id="insertMessage" parameterType="com.wales.chat.model.PrivateMessage">

@@ -10,7 +10,7 @@ public interface RoomMapper {
 
     ChatRoom findById(Integer id);
 
-    List<ChatRoom> list(Integer start, Integer end);  //limited by page
+    List<ChatRoom> list(Integer start, Integer end);
 
     Integer insertRoom(ChatRoom chatRoom);
 }

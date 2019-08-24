@@ -12,6 +12,8 @@
             message
         where
             room_id = #{id}
+        limit
+            #{start}, #{end}
     </select>
 
     <select id="getMessageByUserId" parameterType="Integer" resultType="ChatMessage">

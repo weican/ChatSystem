@@ -5,6 +5,7 @@ import com.wales.chat.dao.RoomMapper;
 import com.wales.chat.model.ChatRoom;
 import com.wales.chat.service.dto.RoomDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,10 @@ public class RoomServiceImpl implements RoomService{
     @Autowired
     User_roomMapper user_roomMapper;
 
+    @Value("${pageAmount}")
+    private Integer pageAmount;
+
+
     @Override
     public Optional<ChatRoom> getRoom(Integer id) {
         final ChatRoom chatRoom = roomMapper.findById(id);
@@ -27,7 +32,7 @@ public class RoomServiceImpl implements RoomService{
 
     @Override
     public Optional<List<ChatRoom>> getRooms(Integer page) {
-        final List<ChatRoom> chatRooms = roomMapper.list(page * 10,page * 10 + 10);
+        final List<ChatRoom> chatRooms = roomMapper.list(page * pageAmount,page * pageAmount + pageAmount);
         return Optional.ofNullable(chatRooms);
     }
 
