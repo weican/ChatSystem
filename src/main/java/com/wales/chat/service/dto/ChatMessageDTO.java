@@ -1,16 +1,16 @@
 package com.wales.chat.service.dto;
 
 public class ChatMessageDTO {
-    Integer fromUserId;
+    Integer posterId ;
     Integer toUserId;
     String message;
 
-    public Integer getFromUserId() {
-        return fromUserId;
+    public Integer getPosterId() {
+        return posterId;
     }
 
-    public void setFromUserId(Integer fromUserId) {
-        this.fromUserId = fromUserId;
+    public void setPosterId(Integer posterId) {
+        this.posterId = posterId;
     }
 
     public Integer getToUserId() {

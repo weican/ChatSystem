@@ -2,7 +2,7 @@
 post
 http://localhost:8080/api/rooms/1/messages
 {
-	"fromUserId": 3,
+	"posterId ": 3,
     "toUserId": 1,
     "message": "room test"
 	
@@ -11,8 +11,15 @@ http://localhost:8080/api/rooms/1/messages
 post
 http://localhost:8080/api/rooms/1/messages
 {
-	"fromUserId": 3,
+	"posterId ": 3,
     "toUserId": 1,
     "message": "room test"
 
+}
+
+post
+http://localhost:8080/api/rooms
+{
+    "name": "new room 1",
+    "userIdList": [1,2,3]
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Optional;
 
 
 @RestController
@@ -20,14 +21,14 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> getUser(@RequestBody ChatUser chatUser) {
-        String password = new String(Base64.getDecoder()
-                .decode(chatUser.getPassword().replace("Basic ", "")), StandardCharsets.UTF_8);
-        String token= userService.login(chatUser.getName(),password);
-        if(StringUtils.isEmpty(token)){
-            return new ResponseEntity<>("no token found", HttpStatus.BAD_REQUEST); // TODO Exception
+
+        ChatUser chatUserData = userService.login(chatUser.getName(), chatUser.getPassword());
+
+        if(chatUserData == null){
+            return new ResponseEntity<>("User is not found", HttpStatus.BAD_REQUEST); // TODO Exception
         }
 
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        return new ResponseEntity<>(chatUserData, HttpStatus.OK);
     }
 
 }

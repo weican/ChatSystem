@@ -54,7 +54,7 @@ public class MessgaeServiceImpl implements MessgaeService {
         user_rooms.parallelStream().forEach( user_room -> {
 
             ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setFrom_user(chatMessageDTO.getFromUserId());
+            chatMessage.setFrom_user(chatMessageDTO.getPosterId());
             chatMessage.setRoom_id(user_room.getRoom_id());
             chatMessage.setMessage(chatMessageDTO.getMessage());
             chatMessage.setTo_user(user_room.getUser_id());

@@ -18,11 +18,11 @@ public class UserDetailsSrvice  implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         ChatUser chatUser = userName.findByUserName(username);
-        System.out.println(chatUser.getName());
         if(chatUser == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         }
         else {
+            System.out.println(chatUser.getName());
             return new User(chatUser);
         }
     }
