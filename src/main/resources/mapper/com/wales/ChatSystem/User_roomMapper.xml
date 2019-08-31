@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wales.chat.dao.User_roomMapper">
+
+    <select id="getUserRoom"  parameterType="Integer"  resultType="User_room">
+        select
+            user_id, room_id
+        from
+            user_room
+        where room_id = #{roomId}
+    </select>
+    <insert id="insertUserRoom" parameterType="Integer">
+        insert into user_room
+            (user_id, room_id)
+        values
+            (#{userId}, #{roomId})
+    </insert>
+
+</mapper>

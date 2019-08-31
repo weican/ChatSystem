@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wales.chat.dao.PrivateMessageMapper">
+
+
+    <select id="getMessageByUserId" parameterType="Integer" resultType="PrivateMessage">
+        select
+            from_user, to_user, message, posted_on
+        from
+            private_message
+        where
+            to_user = #{id}
+        limit #{start}, #{end}
+    </select>
+
+    <insert id="insertMessage" parameterType="com.wales.chat.model.PrivateMessage">
+        insert into private_message
+            (from_user, to_user, message, posted_on)
+        values
+            (#{from_user}, #{to_user}, #{message}, now())
+    </insert>
+</mapper>

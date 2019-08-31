@@ -1,15 +1,11 @@
 package com.wales.chat.controller;
 
-import com.wales.chat.controller.error.UserException;
-import com.wales.chat.model.User;
+import com.wales.chat.model.ChatUser;
 import com.wales.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -20,16 +16,16 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/user")
-    public ResponseEntity<?> getUser(@RequestParam String name, @RequestParam String password) {
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getUser(@PathVariable Integer id) {
 
-        Optional<User> user = userService.getUser(name,password);
+        Optional<ChatUser> chatUserData = userService.getUser(id);
 
-//        if(user.isPresent()) {
-//            throw new UserException("The user is not found.");
-//        }
+        if(chatUserData.isPresent()){
+            return new ResponseEntity<>(chatUserData.get(), HttpStatus.OK);
+        }
 
-        return new ResponseEntity<>(user.get(), HttpStatus.OK);
+        return new ResponseEntity<>("User is not found", HttpStatus.BAD_REQUEST);
     }
 
 }
