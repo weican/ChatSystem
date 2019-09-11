@@ -47,4 +47,10 @@ public class RoomController {
         }
             return new ResponseEntity<>(room.get(), HttpStatus.OK);
     }
+
+    @GetMapping("/room/{id}/users")
+    public ResponseEntity<?> getUsersById(@PathVariable Integer id) {
+
+        return  new ResponseEntity<>(roomService.getUsersById(id), HttpStatus.OK);
+    }
 }

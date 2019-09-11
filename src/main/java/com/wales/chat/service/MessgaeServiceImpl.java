@@ -6,13 +6,10 @@ import com.wales.chat.dao.User_roomMapper;
 import com.wales.chat.exception.NotFoundException;
 import com.wales.chat.model.*;
 import com.wales.chat.service.dto.ChatMessageDTO;
-import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
