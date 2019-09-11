@@ -4,6 +4,7 @@ import com.wales.chat.dao.User_roomMapper;
 import com.wales.chat.dao.RoomMapper;
 import com.wales.chat.model.ChatRoom;
 import com.wales.chat.service.dto.RoomDTO;
+import com.wales.chat.service.dto.RoomWithUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -49,5 +50,11 @@ public class RoomServiceImpl implements RoomService{
                 .parallelStream()
                 .forEach( userId -> user_roomMapper.insertUserRoom(userId, chatRoom.getId()));
         return chatRoom.getId();
+    }
+
+    @Override
+    public List<RoomWithUser> getUsersById(Integer id) {
+
+       return roomMapper.getUsersById(id);
     }
 }

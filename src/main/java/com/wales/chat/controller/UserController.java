@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<?> getUser(@PathVariable Integer id) {
 
         Optional<ChatUser> chatUserData = userService.getUser(id);

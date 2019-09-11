@@ -27,4 +27,14 @@
         values
             (#{name})
     </insert>
+
+    <select id="getUsersById" resultType="com.wales.chat.service.dto.RoomWithUser"  parameterType="Integer" >
+        select
+            id, name, room_id
+        from
+            user_room inner
+        join chat_user on
+            chat_user.id = user_room.user_id
+        where room_id = #{id}
+    </select>
 </mapper>

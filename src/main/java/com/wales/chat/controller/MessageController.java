@@ -55,5 +55,4 @@ public class MessageController {
 
         return new ResponseEntity<>(privateMessages, HttpStatus.OK);
     }
-
 }
